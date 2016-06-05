@@ -1,9 +1,9 @@
 #include "Complex.h"
 #include "Log.h"
+#include "Timer.h"
+#include "Utils.h"
 
-int main(int argc, char** argv) {
-	LOG("Start main", "");
-
+void test() {
 	Complex* array[1000];
 	int iterations = 5000;
 	for (int i = 0; i < iterations; i++) {
@@ -17,6 +17,22 @@ int main(int argc, char** argv) {
 			delete array[j];
 		}
 	}
+}
+
+int main(int argc, char** argv) {
+	LOG("Start main", "");
+
+	int loop = 5;
+	int count = 0;
+	double total = 0;
+	while (count < loop) {
+		total += functionTime(test);
+		count++;
+	}
+	double measure = total / (double) (loop);
+	LOG(to_string(measure).c_str(), "");
+
+	functionTime(test);
 
 	LOG("End", "");
 	return 0;

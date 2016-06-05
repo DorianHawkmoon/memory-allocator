@@ -131,6 +131,8 @@
   <ItemGroup>
     <ClInclude Include="Complex.h" />
     <ClInclude Include="Log.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Complex.cpp" />
