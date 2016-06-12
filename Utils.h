@@ -1,4 +1,6 @@
 #pragma once
+#ifndef UTILS_H
+#define UTILS_H
 #include <string>
 #include <sstream>
 
@@ -7,3 +9,4 @@ std::string to_string(double x) {
 	ss << x;
 	return ss.str();
 }
+#endif

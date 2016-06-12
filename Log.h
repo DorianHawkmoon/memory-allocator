@@ -1,5 +1,6 @@
 #pragma once
-
+#ifndef LOG_H
+#define LOG_H
 // all Log(); messages will be appended to this file
 #define LOGFILE	"debug.log"
 
@@ -30,3 +31,5 @@ extern bool LogCreated;
 
 // logs a message to LOGFILE
 void Log(const char file[], int line, const char* format, ...);
+
+#endif
