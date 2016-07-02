@@ -20,13 +20,13 @@ void test() {
 	for (int i = 0; i < iterations; i++) {
 		//create the numbers
 		for (int j = 0; j < 1000; j++) {
-			arrayNumber[j] = new(*baseMemory) Complex(i, j);
+			arrayNumber[j] = new(*poolMemory) Complex(i, j);
 			//arrayNumber[j] = new Complex(i, j);
 		}
 
 		//delete the numbers
 		for (int j = 0; j < 1000; j++) {
-			deleteOverride(*baseMemory, arrayNumber[j]);
+			//deleteOverride(*poolMemory, arrayNumber[j]);
 			//delete arrayNumber[j];
 		}
 		//delete[] arrayNumber;
