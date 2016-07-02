@@ -21,16 +21,13 @@ void test() {
 		//create the numbers
 		for (int j = 0; j < 1000; j++) {
 			arrayNumber[j] = new(*poolMemory) Complex(i, j);
-			//arrayNumber[j] = new Complex(i, j);
 		}
 
 		//delete the numbers
 		for (int j = 0; j < 1000; j++) {
-			//deleteOverride(*poolMemory, arrayNumber[j]);
-			//delete arrayNumber[j];
+			deleteOverride(*poolMemory, arrayNumber[j]);
 		}
-		//delete[] arrayNumber;
-		//deleteOverride(*baseMemory, *arrayNumber);
+		deleteOverride(*poolMemory, *arrayNumber);
 	}
 }
 
@@ -39,6 +36,7 @@ int main(int argc, char** argv) {
 
 	baseMemory = new BaseMemoryManager();
 	poolMemory = new PoolMemoryManager();
+	poolBitmapMemory = new PoolBitmappedMemoryManager();
 	
 	int loop = 5;
 	int count = 0;

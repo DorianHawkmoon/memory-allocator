@@ -29,6 +29,7 @@ void PoolMemoryManager::freeMemory(void* pointer) {
 }
 
 void PoolMemoryManager::expandPoolSize() {
+	//convert it for more class, not only complex
 	size_t size = (sizeof(Complex) > sizeof(Store*)) ?
 		sizeof(Complex) : sizeof(Store*);
 	Store* head2 = reinterpret_cast <Store*> (new char[size]);
