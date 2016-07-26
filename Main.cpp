@@ -19,15 +19,15 @@ void test() {
 	Complex* arrayNumber[1000];
 	for (int i = 0; i < iterations; i++) {
 		//create the numbers
-		for (int j = 0; j < 1000; j++) {
-			arrayNumber[j] = new(*poolMemory) Complex(i, j);
+		for (int j = 0; j < 5; j++) {
+			arrayNumber[j] = new(*poolBitmapMemory) Complex(i, j);
 		}
 
 		//delete the numbers
-		for (int j = 0; j < 1000; j++) {
-			deleteOverride(*poolMemory, arrayNumber[j]);
+		for (int j = 0; j < 5; j++) {
+			deleteOverride(*poolBitmapMemory, arrayNumber[j]);
 		}
-		deleteOverride(*poolMemory, *arrayNumber);
+		deleteOverride(*poolBitmapMemory, *arrayNumber);
 	}
 }
 
@@ -50,6 +50,6 @@ int main(int argc, char** argv) {
 
 	functionTime(test);
 
-	LOG("End", "");
+	LOG("End\n", "");
 	return 0;
 }

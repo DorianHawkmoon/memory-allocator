@@ -3,7 +3,8 @@
 #define GLOBALS_H
 #include "Memories.h"
 
-BaseMemoryManager* baseMemory;
-PoolMemoryManager* poolMemory;
+extern BaseMemoryManager* baseMemory;
+extern PoolMemoryManager* poolMemory;
+extern PoolBitmappedMemoryManager* poolBitmapMemory;
 
 #endif

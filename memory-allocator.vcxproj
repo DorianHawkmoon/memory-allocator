@@ -135,15 +135,18 @@
     <ClInclude Include="Log.h" />
     <ClInclude Include="BaseMemoryManager.h" />
     <ClInclude Include="Memories.h" />
+    <ClInclude Include="PoolBitmappedMemoryManager.h" />
     <ClInclude Include="PoolMemoryManager.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Complex.cpp" />
+    <ClCompile Include="Globals.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="BaseMemoryManager.cpp" />
+    <ClCompile Include="PoolBitmappedMemoryManager.cpp" />
     <ClCompile Include="PoolMemoryManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
