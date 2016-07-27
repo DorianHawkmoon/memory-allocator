@@ -17,15 +17,16 @@ void test() {
 	
 	int iterations = 5000;
 	Complex* arrayNumber[1000];
+	
 	for (int i = 0; i < iterations; i++) {
 		//create the numbers
-		for (int j = 0; j < 5; j++) {
+		for (int j = 0; j < 1000; j++) {
 			arrayNumber[j] = new(*poolBitmapMemory) Complex(i, j);
 		}
 
 		//delete the numbers
-		for (int j = 0; j < 5; j++) {
-			deleteOverride(*poolBitmapMemory, arrayNumber[j]);
+		for (int j = 0; j < 1000; j++) {
+			deleteOverride(*poolBitmapMemory, *arrayNumber);
 		}
 		deleteOverride(*poolBitmapMemory, *arrayNumber);
 	}

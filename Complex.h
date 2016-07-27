@@ -4,6 +4,7 @@
 
 class Complex {
 public:
+	Complex(): r(1), c(1) {}
 	Complex(double a, double b): r(a), c(b) {
 	}
 	~Complex() {
