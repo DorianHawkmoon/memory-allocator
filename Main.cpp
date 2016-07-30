@@ -16,19 +16,20 @@ void deleteOverride(IMemoryManager& manager, T* &pointer) {
 void test() {
 	
 	int iterations = 5000;
-	Complex* arrayNumber[1000];
+	
 	
 	for (int i = 0; i < iterations; i++) {
+		Complex* arrayNumber=new(*poolBitmapMemory) Complex[1000];
 		//create the numbers
-		for (int j = 0; j < 1000; j++) {
-			arrayNumber[j] = new(*poolBitmapMemory) Complex(i, j);
-		}
+		//for (int j = 0; j < 1000; j++) {
+		//	arrayNumber[j] = new(*poolBitmapMemory) Complex(i, j);
+		//}
 
-		//delete the numbers
-		for (int j = 0; j < 1000; j++) {
-			deleteOverride(*poolBitmapMemory, *arrayNumber);
-		}
-		deleteOverride(*poolBitmapMemory, *arrayNumber);
+		////delete the numbers
+		//for (int j = 0; j < 1000; j++) {
+		//	deleteOverride(*poolBitmapMemory, arrayNumber[j]);
+		//}
+		deleteOverride(*poolBitmapMemory, arrayNumber);
 	}
 }
 
@@ -48,8 +49,6 @@ int main(int argc, char** argv) {
 	}
 	double measure = total / (double) (loop);
 	LOG(to_string(measure).c_str(), "");
-
-	functionTime(test);
 
 	LOG("End\n", "");
 	return 0;

@@ -40,10 +40,10 @@ void PoolBitmappedMemoryManager::BitMapEntry::SetMultipleBits(int position, bool
 
 void PoolBitmappedMemoryManager::BitMapEntry::SetRangeOfInt(int* element, int msb, int lsb, bool flag) {
 	if (flag) {
-		int mask = (unsigned(-1) << lsb) & (unsigned(-1) >> INT_SIZE - msb - 1);
+		int mask = (unsigned(-1) << lsb) & (unsigned(-1) >> (INT_SIZE - msb - 1));
 		*element |= mask;
 	} else {
-		int mask = (unsigned(-1) << lsb) & (unsigned(-1) >> INT_SIZE - msb - 1);
+		int mask = (unsigned(-1) << lsb) & (unsigned(-1) >> (INT_SIZE - msb - 1));
 		*element &= ~mask;
 	}
 }
@@ -158,7 +158,7 @@ void* PoolBitmappedMemoryManager::allocate(size_t size) {
 						return AllocateArrayMemory(size);
 					else {
 						info.StartPosition = BIT_MAP_SIZE - entry->BlocksAvailable;
-						info.Size = size / sizeof(Complex);
+						info.Size = static_cast<int>(size / sizeof(Complex));
 						Complex* baseAddress = static_cast<Complex*>(
 							MemoryPoolList[info.MemPoolListIndex]) + info.StartPosition;
 
@@ -171,6 +171,7 @@ void* PoolBitmappedMemoryManager::allocate(size_t size) {
 			}
 		}
 	}
+	return nullptr;
 }
 
 void PoolBitmappedMemoryManager::freeMemory(void* pointer) {
@@ -187,7 +188,7 @@ std::vector<void*>& PoolBitmappedMemoryManager::GetMemoryPoolList() {
 }
 
 void PoolBitmappedMemoryManager::SetBlockBit(void* object, bool flag) {
-	int i = BitMapEntryList.size() - 1;
+	int i = static_cast<int>(BitMapEntryList.size()) - 1;
 	//iterate the list of bitmap entries
 	for (; i >= 0; i--) {
 		BitMapEntry* bitMap = &BitMapEntryList[i];
@@ -213,9 +214,9 @@ void PoolBitmappedMemoryManager::SetMultipleBlockBits(ArrayMemoryInfo* info, boo
 void* PoolBitmappedMemoryManager::AllocateArrayMemory(size_t size) {
 	void* chunkAddress = AllocateChunkAndInitBitMap();
 	ArrayMemoryInfo info;
-	info.MemPoolListIndex = MemoryPoolList.size() - 1;
+	info.MemPoolListIndex = static_cast<int>(MemoryPoolList.size()) - 1;
 	info.StartPosition = 0;
-	info.Size = size / sizeof(Complex);
+	info.Size = static_cast<int>(size) / sizeof(Complex);
 	ArrayMemoryList[chunkAddress] = info;
 	SetMultipleBlockBits(&info, false);
 	return chunkAddress;
@@ -231,7 +232,7 @@ void* PoolBitmappedMemoryManager::AllocateChunkAndInitBitMap() {
 	MemoryPoolList.push_back(memoryBeginAddress);
 	//set the index in the bitmap memory
 	//this bitmap memory has a index X on memory pool list
-	mapEntry.Index = MemoryPoolList.size() - 1;
+	mapEntry.Index = static_cast<int>(MemoryPoolList.size()) - 1;
 	//store the bitmap memory in its list
 	BitMapEntryList.push_back(mapEntry);
 	//return the new begin of the memory

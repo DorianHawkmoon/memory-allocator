@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "Log.h"
 
+#include "Complex.h"
+
 BaseMemoryManager::BaseMemoryManager() {
 }
 BaseMemoryManager::~BaseMemoryManager() {}
